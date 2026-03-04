@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from schemas.user import UserSignUpModel
 from services.user_services import create_user
 from routers.auth import router as user_router
+from routers.search import router as search_router
 app = FastAPI()
 
 from fastapi.middleware.cors import CORSMiddleware
@@ -15,6 +16,7 @@ app.add_middleware(
 )
 
 app.include_router(user_router)
+app.include_router(search_router)
 
 
 @app.get('/')

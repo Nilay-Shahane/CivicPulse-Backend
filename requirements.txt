@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+pydantic
+python-dotenv
+
+torch
+transformers
+
+google-api-python-client
+praw
+
+deep-translator
+langdetect
+
+supabase
