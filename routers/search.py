@@ -9,14 +9,11 @@ import pandas as pd
 
 router = APIRouter()
 
-@router.post("/search")
-def search_policy(data: SearchRequest):
-
-    yt_comments = get_youtube_comments(data.query)
-    reddit_comments = get_reddit_comments(data.query)
+def run_sentiment_pipeline(query: str):
+    yt_comments = get_youtube_comments(query)
+    reddit_comments = get_reddit_comments(query)
 
     combined = yt_comments + reddit_comments
-
     combined = translate_batch(combined)
     combined = analyze_batch(combined)
 
@@ -29,10 +26,15 @@ def search_policy(data: SearchRequest):
     bar_chart = generate_bar_chart(stats)
 
     return {
-        "query": data.query,
+        "query": query,
         "stats": stats,
         "visualizations": {
             "sentiment_pie_chart": pie_chart,
             "sentiment_bar_chart": bar_chart,
         }
     }
+
+
+@router.post("/search")
+def search_policy(data: SearchRequest):
+    return run_sentiment_pipeline(data.query)

@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import pandas as pd
 import base64
@@ -10,7 +12,9 @@ def plot_to_base64():
     plt.savefig(buffer, format="png", bbox_inches="tight")
     buffer.seek(0)
     img_base64 = base64.b64encode(buffer.read()).decode("utf-8")
-    plt.close()
+    plt.clf()  
+    plt.close('all') 
+    buffer.close() 
     return f"data:image/png;base64,{img_base64}"
 
 
