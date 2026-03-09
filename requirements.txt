@@ -13,3 +13,7 @@ deep-translator
 langdetect
 
 supabase
+apscheduler
+numpy
+pandas 
+matplotlib
